@@ -16,7 +16,7 @@ use vars qw($DICTIONARY $FOLLOWING $GROUPS $MINLEN $MAXLEN
 %EXPORT_TAGS = ('all' => [@EXPORT_OK]);
 @ISA = qw(Exporter);
 
-$VERSION = '1.03';
+$VERSION = '1.04';
 
 $DICTIONARY = 5;
 $FOLLOWING = 3;
@@ -102,9 +102,14 @@ sub CheckLength {
 
 sub IsBadPassword {
 	my $pass = shift;
-	return "Not between $MINLEN and $MAXLEN characters"
-		if CheckLength($pass);
-	return "contains bad characters" if CheckCharset($pass);
+	if (CheckLength($pass)) {
+    if ($MAXLEN && $MINLEN) {
+      return "Not between $MINLEN and $MAXLEN characters";
+    }
+    elsif (!$MAXLEN) { return "Not $MINLEN characters or greater"; }
+    else { return "Not less than or equal to $MAXLEN characters"; }
+  }
+  return "contains bad characters" if CheckCharset($pass);
 	return "contains less than $GROUPS character groups"
 		if CheckTypes($pass);
 	return "contains over $FOLLOWING leading characters in sequence"

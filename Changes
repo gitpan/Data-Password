@@ -5,3 +5,6 @@ Revision history for Perl extension Data::Password.
 1.03 Sat Apr 3 23:50:12 2004
 	- Added new variable @DICTIONARIES
 	- Documentation updated
+1.04 Sat Aug 7 11:28:11 2004
+	- Fixed error message for $MAXLEN==0 (thanks to James Saint-Rossy
+		who submited a patch)

@@ -5,6 +5,9 @@ Revision history for Perl extension Data::Password.
 1.03 Sat Apr 3 23:50:12 2004
 	- Added new variable @DICTIONARIES
 	- Documentation updated
-1.04 Sat Aug 7 11:28:11 2004
+1.04 Sat Aug 7 11:28:11 IDT 2004
 	- Fixed error message for $MAXLEN==0 (thanks to James Saint-Rossy
 		who submited a patch)
+1.05 Sat Aug 7 22:47:42 IDT 2004
+	- Fixed test.pl to work on platfrom with no dictionaries.
+	  (Thanks to 'Barbie' from pan-testers[at]perl.org)

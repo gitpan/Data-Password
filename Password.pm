@@ -16,7 +16,7 @@ use vars qw($DICTIONARY $FOLLOWING $GROUPS $MINLEN $MAXLEN
 %EXPORT_TAGS = ('all' => [@EXPORT_OK]);
 @ISA = qw(Exporter);
 
-$VERSION = '1.04';
+$VERSION = '1.05';
 
 $DICTIONARY = 5;
 $FOLLOWING = 3;

@@ -8,13 +8,27 @@
 
 BEGIN { $| = 1; print "1..11\n"; }
 END {print "not ok 1\n" unless $loaded;}
-use Data::Password qw(IsBadPassword $MAXLEN);
+use Data::Password qw(IsBadPassword $MAXLEN @DICTIONARIES);
 $loaded = 1;
+
 print "ok 1\n";
 
 my %tests = qw(BlaBla 1 blabla 0 cleaner 0 qwerty 0 
 	aB1234 0 xxxZZZ 1 xxxxZZ 0 
 	Abramson 0 MAxLEN1288457 0 MAXlen12r45f7 1);
+my $have_dic =0;
+
+#@DICTIONARIES = undef;
+foreach (@DICTIONARIES){
+	if (-r $_ && /words$/) {
+		print " \nDictionary $_ found.\n";
+	 	$have_dic = 1;
+		last;
+	 };
+}
+
+print "No Dictionary found.\n" unless $have_dic;
+$tests{Abramson} = $have_dic ? 0 : 1;
 
 my $test = 1;
 

@@ -17,59 +17,58 @@ SYNOPSIS
             print IsBadPassword("clearant");
 
 DESCRIPTION
-    This modules checks potential passwords for crackability. It
-    checks that the password is in the appropriate length, that it
-    has enough character groups, that it does not contain the same
-    chars repeatedly or ascending or descending characters, or
-    charcters close to each other in the keyboard. It will also
-    attempt to search the ispell word file for existance of whole
-    words. The module's policies can be modified by changing its
-    variables. (Check the section on "VARIABLES"). For doing it, it
-    is recommended to import the ':all' shortcut when requiring it:
+    This modules checks potential passwords for crackability. It checks that
+    the password is in the appropriate length, that it has enough character
+    groups, that it does not contain the same chars repeatedly or ascending
+    or descending characters, or charcters close to each other in the
+    keyboard. It will also attempt to search the ispell word file for
+    existance of whole words. The module's policies can be modified by
+    changing its variables. (Check "VARIABLES"). For doing it, it is
+    recommended to import the ':all' shortcut when requiring it:
 
     *use Data::Password qw(:all);*
 
 FUNCTIONS
     1   IsBadPassword(password)
 
-        Returns undef if the password is ok, or a textual
-        description of the fault if any.
+        Returns undef if the password is ok, or a textual description of the
+        fault if any.
 
     2   IsBadPasswordForUNIX(user, password)
 
-        Performs two additional checks: compares the password
-        against the login name and the "comment" (ie, real name)
-        found on the user file.
+        Performs two additional checks: compares the password against the
+        login name and the "comment" (ie, real name) found on the user file.
 
 VARIABLES
     1   $DICTIONARY
 
-        Minimal length for dictionary words that are not allowed to
-        appear in the password. Set to false to disable dictionary
-        check.
+        Minimal length for dictionary words that are not allowed to appear
+        in the password. Set to false to disable dictionary check.
 
     2   $FOLLOWING
 
-        Maximal length of characters in a row to allow if the same
-        or following. If $FOLLOWING_KEYBOARD is true (default), the
-        module will also check for alphabetical keys following,
-        according to the English keyboard layout. Set $FOLLOWING to
-        false to bypass this check.
+        Maximal length of characters in a row to allow if the same or
+        following. If $FOLLOWING_KEYBOARD is true (default), the module will
+        also check for alphabetical keys following, according to the English
+        keyboard layout. Set $FOLLOWING to false to bypass this check.
 
     3   $GROUPS
 
-        Groups of characters are lowercase letters, uppercase
-        letters, digits and the rest of the allowed characters. Set
-        $GROUPS to the number of minimal character groups a password
-        is required to have. Setting to false or to 1 will bypass
-        the check.
+        Groups of characters are lowercase letters, uppercase letters,
+        digits and the rest of the allowed characters. Set $GROUPS to the
+        number of minimal character groups a password is required to have.
+        Setting to false or to 1 will bypass the check.
 
     4   $MINLEN
 
         $MAXLEN
 
-        Minimum and maximum length of a password. Both can be set to
-        false.
+        Minimum and maximum length of a password. Both can be set to false.
+
+    5   @DICTIONARIES
+
+        Location where we are looking for dictionary files. You may want to
+        set this variable if you are using not *NIX like operating system.
 
 FILES
     *   /usr/dict/web2
@@ -78,6 +77,16 @@ FILES
 
     *   /etc/passwd
 
+SEE ALSO
+    See Data::Password::BasicCheck if you need only basic password checking.
+
 AUTHOR
     Raz Information Systems, razinf@cpan.org, raz@raz.co.il.
+
+COPYRIGHT
+    Copyright (c) 2001, 2002, 2003, 2004 Raz Information Systems Ltd.
+    http://www.raz.co.il/
+
+    This package is distributed under the same terms as Perl itself, see the
+    Artistic License on Perl's home page.
 

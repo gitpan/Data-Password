@@ -2,4 +2,6 @@ Revision history for Perl extension Data::Password.
 
 0.01  Wed Jan 16 17:26:03 2002
 	- original version; created by h2xs 1.19
-
+1.03 Sat Apr 3 23:50:12 2004
+	- Added new variable @DICTIONARIES
+	- Documentation updated

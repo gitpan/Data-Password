@@ -13,7 +13,7 @@ $loaded = 1;
 print "ok 1\n";
 
 my %tests = qw(BlaBla 1 blabla 0 cleaner 0 qwerty 0 
-	aB1234 0 xxxZZZ 1 xxxxZZ 0);
+	aB1234 0 xxxZZZ 1 xxxxZZ 0 Abramson 0);
 
 my $test = 1;
 
@@ -36,4 +36,3 @@ while (my ($pass, $good) = each %tests) {
 # Insert your test code below (better if it prints "ok 13"
 # (correspondingly "not ok 13") depending on the success of chunk 13
 # of the test code):
-

@@ -1,20 +1,22 @@
 package Data::Password;
 
-# Ariel Brosh, January 2002, for Raz Information Systems
+# Ariel Brosh (RIP), January 2002, for Raz Information Systems
+# Oded S. Resnik, 3 April 2004, for Raz Information Systems
+
 
 use Symbol;
 use strict;
 require Exporter;
 use vars qw($DICTIONARY $FOLLOWING $GROUPS $MINLEN $MAXLEN
-		$FOLLOWING_KEYBOARD
+		$FOLLOWING_KEYBOARD @DICTIONARIES
 		$VERSION @ISA @EXPORT_OK %EXPORT_TAGS);
 
 @EXPORT_OK = qw($DICTIONARY $FOLLOWING $GROUPS $FOLLOWING_KEYBOARD
-	$MINLEN $MAXLEN IsBadPassword IsBadPasswordForUNIX);
+	@DICTIONARIES $MINLEN $MAXLEN IsBadPassword IsBadPasswordForUNIX);
 %EXPORT_TAGS = ('all' => [@EXPORT_OK]);
 @ISA = qw(Exporter);
 
-$VERSION = '1.01';
+$VERSION = '1.03';
 
 $DICTIONARY = 5;
 $FOLLOWING = 3;
@@ -23,12 +25,14 @@ $GROUPS = 2;
 
 $MINLEN = 6;
 $MAXLEN = 8;
+@DICTIONARIES = qw(/usr/dict/web2 /usr/dict/words /usr/share/dict/words /usr/share/dict/linux.words);
 
 sub OpenDictionary {
 	my $sym = gensym;
-	foreach (qw(/usr/dict/web2 /usr/dict/words)) {
+	foreach (@DICTIONARIES) {
 		return $sym if (open($sym, $_));
 	}
+	undef;
 }
 
 sub CheckDict {
@@ -39,7 +43,10 @@ sub CheckDict {
 	while (<$dict>) {
 		chop;
 		next if length($_) < $DICTIONARY;
-		return $_ if ($pass =~ /$_/i);
+		if ($pass =~ /$_/i) {
+			close($dict);
+			return $_;
+		}
 	}
 	close($dict);
 	undef;
@@ -60,8 +67,11 @@ sub CheckSort {
 		return 1 if $diffs =~ /([\@AB])\1{$len}/;
 		return undef unless $FOLLOWING_KEYBOARD;
 
+		my $mask = $pass;
 		$pass =~ tr/A-Z/a-z/;
+		$mask ^= $pass;
 		$pass =~ tr/qwertyuiopasdfghjklzxcvbnm/abcdefghijKLMNOPQRStuvwxyz/;
+		$pass ^= $mask;
 	}
 	undef;
 }
@@ -215,6 +225,13 @@ $MAXLEN
 
 Minimum and maximum length of a password. Both can be set to false.
 
+=item 5
+
+@DICTIONARIES
+
+Location where we are looking for dictionary files. You may want to 
+set this variable if you are using not *NIX like operating system.
+
 =back
 
 =head1 FILES
@@ -235,8 +252,22 @@ Minimum and maximum length of a password. Both can be set to false.
 
 =back
 
+=head1 SEE ALSO
+
+See L<Data::Password::BasicCheck> if you need only basic password checking.
+
+
 =head1 AUTHOR
 
 Raz Information Systems, B<razinf@cpan.org>, B<raz@raz.co.il>.
+
+=head1 COPYRIGHT
+
+Copyright (c) 2001, 2002, 2003, 2004 Raz Information Systems Ltd.
+http://www.raz.co.il/
+
+This package is distributed under the same terms as Perl itself, see the
+Artistic License on Perl's home page.
+
 
 =cut

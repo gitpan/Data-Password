@@ -5,7 +5,7 @@ use ExtUtils::MakeMaker;
 sub MY::postamble {
         package MY;
         shift->SUPER::postamble . <<'MAKE';
-dist : README
+distdir : README
 
 README : Password.pm
 	@$(PERL) -MPod::Text -e "pod2text('$<');" > $@

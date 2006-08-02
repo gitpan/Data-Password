@@ -7,7 +7,14 @@ Revision history for Perl extension Data::Password.
 	- Documentation updated
 1.04 Sat Aug 7 11:28:11 IDT 2004
 	- Fixed error message for $MAXLEN==0 (thanks to James Saint-Rossy
-		who submited a patch)
+		who submitted a patch)
 1.05 Sat Aug 7 22:47:42 IDT 2004
-	- Fixed test.pl to work on platfrom with no dictionaries.
-	  (Thanks to 'Barbie' from pan-testers[at]perl.org)
+	- Fixed test.pl to work on platforms with no dictionaries.
+	  (Thanks to 'Barbie' from cpan-testers)
+
+1.06 Wed Aug 2 22:14:35 IDT 2006
+         - Added dummy dictionary.
+         - Stricter dictionary checking (Requested by Gary Bennett)
+           If your dictionary has entries with '.' password is
+           not checked against these entries.
+

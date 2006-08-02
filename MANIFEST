@@ -3,5 +3,6 @@ Makefile.PL
 MANIFEST
 Password.pm
 test.pl
+words					Dummy dictionary for tests
 README
 META.yml                                 Module meta-data (added by MakeMaker)

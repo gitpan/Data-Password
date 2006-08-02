@@ -6,7 +6,7 @@
 # Change 1..1 below to 1..last_test_to_print .
 # (It may become useful if the test is moved to ./t subdirectory.)
 
-BEGIN { $| = 1; print "1..11\n"; }
+BEGIN { $| = 1; print "1..12\n"; }
 END {print "not ok 1\n" unless $loaded;}
 use Data::Password qw(IsBadPassword $MAXLEN @DICTIONARIES);
 $loaded = 1;
@@ -14,11 +14,14 @@ $loaded = 1;
 print "ok 1\n";
 
 my %tests = qw(BlaBla 1 blabla 0 cleaner 0 qwerty 0 
-	aB1234 0 xxxZZZ 1 xxxxZZ 0 
-	Abramson 0 MAxLEN1288457 0 MAXlen12r45f7 1);
+   aB1234 0 xxxZZZ 1 xxxxZZ 0 
+   Abramson 0 
+   noboXX 1 MAxLEN1288457 0 MAXlen12r45f7 1
+);
 my $have_dic =0;
 
 #@DICTIONARIES = undef;
+@DICTIONARIES = ('words');
 foreach (@DICTIONARIES){
 	if (-r $_ && /words$/) {
 		print " \nDictionary $_ found.\n";

@@ -16,7 +16,7 @@ use vars qw($DICTIONARY $FOLLOWING $GROUPS $MINLEN $MAXLEN
 %EXPORT_TAGS = ('all' => [@EXPORT_OK]);
 @ISA = qw(Exporter);
 
-$VERSION = '1.05';
+$VERSION = '1.06';
 
 $DICTIONARY = 5;
 $FOLLOWING = 3;
@@ -41,8 +41,9 @@ sub CheckDict {
 	my $dict = OpenDictionary();
 	return undef unless $dict;
 	while (<$dict>) {
-		chop;
+		chomp;
 		next if length($_) < $DICTIONARY;
+		next if $_ =~/\W/;
 		if ($pass =~ /$_/i) {
 			close($dict);
 			return $_;
@@ -268,7 +269,7 @@ Raz Information Systems, B<razinf@cpan.org>, B<raz@raz.co.il>.
 
 =head1 COPYRIGHT
 
-Copyright (c) 2001, 2002, 2003, 2004 Raz Information Systems Ltd.
+Copyright (c) 2001 - 2006  Raz Information Systems Ltd.
 http://www.raz.co.il/
 
 This package is distributed under the same terms as Perl itself, see the

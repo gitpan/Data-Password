@@ -4,7 +4,7 @@ package Data::Password;
 # Oded S. Resnik, 3 April 2004, for Raz Information Systems
 
 
-use Symbol;
+
 use strict;
 require Exporter;
 use vars qw($DICTIONARY $FOLLOWING $GROUPS $MINLEN $MAXLEN
@@ -16,7 +16,7 @@ use vars qw($DICTIONARY $FOLLOWING $GROUPS $MINLEN $MAXLEN
 %EXPORT_TAGS = ('all' => [@EXPORT_OK]);
 @ISA = qw(Exporter);
 
-$VERSION = '1.06';
+$VERSION = '1.07';
 
 $DICTIONARY = 5;
 $FOLLOWING = 3;
@@ -28,33 +28,35 @@ $MAXLEN = 8;
 @DICTIONARIES = qw(/usr/dict/web2 /usr/dict/words /usr/share/dict/words /usr/share/dict/linux.words);
 
 sub OpenDictionary {
-	my $sym = gensym;
-	foreach (@DICTIONARIES) {
-		return $sym if (open($sym, $_));
+	foreach my $sym (@DICTIONARIES) {
+		return $sym if -r $sym;
 	}
-	undef;
+	return;
 }
 
 sub CheckDict {
-	return undef unless $DICTIONARY;
+	return unless $DICTIONARY;
 	my $pass = shift;
 	my $dict = OpenDictionary();
-	return undef unless $dict;
-	while (<$dict>) {
-		chomp;
-		next if length($_) < $DICTIONARY;
-		next if $_ =~/\W/;
-		if ($pass =~ /$_/i) {
-			close($dict);
-			return $_;
+	return unless $dict;
+	open (DICT,"$dict") || return;
+        $pass = lc($pass);
+
+	while (my $dict_line  = <DICT>) {
+		chomp ($dict_line);
+		next if length($dict_line) < $DICTIONARY;
+		$dict_line = lc($dict_line);
+		if (index($pass,$dict_line)>-1) {
+			close(DICT);
+			return $dict_line;
 		}
 	}
-	close($dict);
-	undef;
+	close(DICT);
+	return;
 }
 
 sub CheckSort {
-	return undef unless $FOLLOWING;
+	return unless $FOLLOWING;
 	my $pass = shift;
 	foreach (1 .. 2) {
 		my @letters = split(//, $pass);
@@ -66,7 +68,7 @@ sub CheckSort {
 		}
 		my $len = $FOLLOWING - 1;
 		return 1 if $diffs =~ /([\@AB])\1{$len}/;
-		return undef unless $FOLLOWING_KEYBOARD;
+		return unless $FOLLOWING_KEYBOARD;
 
 		my $mask = $pass;
 		$pass =~ tr/A-Z/a-z/;
@@ -74,7 +76,7 @@ sub CheckSort {
 		$pass =~ tr/qwertyuiopasdfghjklzxcvbnm/abcdefghijKLMNOPQRStuvwxyz/;
 		$pass ^= $mask;
 	}
-	undef;
+	return;
 }
 
 sub CheckTypes {
@@ -98,7 +100,7 @@ sub CheckLength {
 	my $len = length($pass);
 	return 1 if ($MINLEN && $len < $MINLEN);
 	return 1 if ($MAXLEN && $len > $MAXLEN);
-	undef;
+	return;
 }
 
 sub IsBadPassword {
@@ -117,7 +119,7 @@ sub IsBadPassword {
 		if CheckSort($pass);
 	my $dict = CheckDict($pass);
 	return "contains the dictionary word '$dict'" if $dict;
-	undef;
+	return;
 }
 
 sub IsBadPasswordForUNIX {
@@ -130,11 +132,11 @@ sub IsBadPasswordForUNIX {
 
 	my ($name,$passwd,$uid,$gid,
        		$quota,$comment,$gcos,$dir,$shell,$expire) = getpwnam($user);
-	return undef unless $comment;
+	return unless $comment;
 	foreach ($comment =~ /([A-Z]+)/ig) {
 		return "is based on the finger information" if ($pass =~ /$_/i);
 	}
-	undef;
+	return;
 }
 
 1;

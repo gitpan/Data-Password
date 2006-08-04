@@ -2,7 +2,8 @@ Changes
 Makefile.PL
 MANIFEST
 Password.pm
-test.pl
-words					Dummy dictionary for tests
+t/IsBadPasswordForUNIX.t
+t/IsBadPassword.t
+t/words					Dummy dictionary for tests
 README
 META.yml                                 Module meta-data (added by MakeMaker)

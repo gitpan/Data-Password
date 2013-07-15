@@ -16,7 +16,7 @@ use vars qw($DICTIONARY $FOLLOWING $GROUPS $MINLEN $MAXLEN
 %EXPORT_TAGS = ('all' => [@EXPORT_OK]);
 @ISA = qw(Exporter);
 
-$VERSION = '1.07';
+$VERSION = '1.08';
 
 $DICTIONARY = 5;
 $FOLLOWING = 3;
@@ -144,7 +144,7 @@ __END__
 
 =head1 NAME
 
-Data::Password - Perl extension for assesing password quality.
+Data::Password - Perl extension for assessing password quality.
 
 =head1 SYNOPSIS
 
@@ -164,10 +164,10 @@ Data::Password - Perl extension for assesing password quality.
 
 =head1 DESCRIPTION
 
-This modules checks potential passwords for crackability.
+This module checks potential passwords for crackability.
 It checks that the password is in the appropriate length,
 that it has enough character groups, that it does not contain the same 
-chars repeatedly or ascending or descending characters, or charcters
+characters repeatedly or ascending or descending characters, or charcters
 close to each other in the keyboard.
 It will also attempt to search the ispell word file for existance 
 of whole words.
@@ -263,16 +263,19 @@ set this variable if you are using not *NIX like operating system.
 =head1 SEE ALSO
 
 See L<Data::Password::BasicCheck> if you need only basic password checking.
+Other modules L<Data::Password::Common>, L<Data::Password::Check>,
+L<Data::Password::Meter>, L<Data::Password::Entropy> 
+and L<String::Validator::Password>
 
 
 =head1 AUTHOR
 
-Raz Information Systems, B<razinf@cpan.org>, B<raz@raz.co.il>.
+Raz Information Systems, B<razinf@cpan.org> 
 
 =head1 COPYRIGHT
 
-Copyright (c) 2001 - 2006  Raz Information Systems Ltd.
-http://www.raz.co.il/
+Copyright (c) 2001 - 2013  Raz Information Systems Ltd.
+L<http://www.raz.co.il/>
 
 This package is distributed under the same terms as Perl itself, see the
 Artistic License on Perl's home page.

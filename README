@@ -1,5 +1,5 @@
 NAME
-    Data::Password - Perl extension for assesing password quality.
+    Data::Password - Perl extension for assessing password quality.
 
 SYNOPSIS
             use Data::Password qw(IsBadPassword);
@@ -17,11 +17,11 @@ SYNOPSIS
             print IsBadPassword("clearant");
 
 DESCRIPTION
-    This modules checks potential passwords for crackability. It checks that
+    This module checks potential passwords for crackability. It checks that
     the password is in the appropriate length, that it has enough character
-    groups, that it does not contain the same chars repeatedly or ascending
-    or descending characters, or charcters close to each other in the
-    keyboard. It will also attempt to search the ispell word file for
+    groups, that it does not contain the same characters repeatedly or
+    ascending or descending characters, or charcters close to each other in
+    the keyboard. It will also attempt to search the ispell word file for
     existance of whole words. The module's policies can be modified by
     changing its variables. (Check "VARIABLES"). For doing it, it is
     recommended to import the ':all' shortcut when requiring it:
@@ -79,13 +79,16 @@ FILES
 
 SEE ALSO
     See Data::Password::BasicCheck if you need only basic password checking.
+    Other modules Data::Password::Common, Data::Password::Check,
+    Data::Password::Meter, Data::Password::Entropy and
+    String::Validator::Password
 
 AUTHOR
-    Raz Information Systems, razinf@cpan.org, raz@raz.co.il.
+    Raz Information Systems, razinf@cpan.org
 
 COPYRIGHT
-    Copyright (c) 2001 - 2006 Raz Information Systems Ltd.
-    http://www.raz.co.il/
+    Copyright (c) 2001 - 2013 Raz Information Systems Ltd.
+    <http://www.raz.co.il/>
 
     This package is distributed under the same terms as Perl itself, see the
     Artistic License on Perl's home page.

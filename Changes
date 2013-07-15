@@ -17,7 +17,9 @@ Revision history for Perl extension Data::Password.
          - Stricter dictionary checking (Requested by Gary Bennett)
            If your dictionary has entries with '.' password is
            not checked against these entries.
-
-1.07 Fri Aug 413:18:42 
+1.07 Fri Aug 4 13:18:42 IDT 2006
          - CheckDict optimized for speed.
          - Symbol::gensym remmoved.
+
+1.08 Mon Jul 15 21:35:11 IDT 2013
+         - minor documentation update (by Neil Bowers)

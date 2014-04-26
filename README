@@ -14,7 +14,7 @@ SYNOPSIS
 
             $GROUPS = 0;
    
-            $SKIPCHARSET = 0;
+            $SKIPCHAR = 0;
 
             print IsBadPassword("clearant");
 
@@ -72,7 +72,7 @@ VARIABLES
         Location where we are looking for dictionary files. You may want to
         set this variable if you are using not *NIX like operating system.
 
-    6   $SKIPCHARSET
+    6   $SKIPCHAR
 
         Set $SKIPCHAR to 1 to skip checking for bad characters.
 
@@ -92,7 +92,7 @@ SEE ALSO
 AUTHOR
     Ariel Brosh (RIP), January 2002.
 
-    Oded S. Resnik, from April 2004 razinf@cpan.org.
+    Oded S. Resnik, from April 2004.
 
 COPYRIGHT
     Copyright (c) 2001 - 2014 Raz Information Systems Ltd.

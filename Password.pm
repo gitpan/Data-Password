@@ -16,7 +16,7 @@ use vars qw($DICTIONARY $FOLLOWING $GROUPS $MINLEN $MAXLEN $SKIPCHAR
 %EXPORT_TAGS = ('all' => [@EXPORT_OK]);
 @ISA = qw(Exporter);
 
-$VERSION = '1.09';
+$VERSION = '1.10';
 
 $DICTIONARY = 5;
 $FOLLOWING = 3;
@@ -163,7 +163,7 @@ Data::Password - Perl extension for assessing password quality.
 
 	$GROUPS = 0;
    
-        $SKIPCHARSET = 0;
+        $SKIPCHAR = 0;
 
 	print IsBadPassword("clearant");
 
@@ -247,7 +247,7 @@ set this variable if you are using not *NIX like operating system.
 
 =item 6
 
-$SKIPCHARSET
+$SKIPCHAR
 
 Set $SKIPCHAR to 1 to skip checking for bad characters.
 
@@ -283,7 +283,7 @@ and L<String::Validator::Password>
 
 Ariel Brosh (RIP), January 2002.
 
-Oded S. Resnik, from April 2004 B<razinf@cpan.org>.
+Oded S. Resnik, from April 2004.
 
 =head1 COPYRIGHT
 

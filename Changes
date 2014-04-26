@@ -25,5 +25,6 @@ Revision history for Perl extension Data::Password.
          - minor documentation update (by Neil Bowers)
 
 1.09 Sat Apr 26 09:42:11 IST 2014
+1.10 Sat Apr 26 16:39:11 IST 2014
          - Passwords contains a space character (by Frederic Van Espen)
          - new variable ($SKIPCHAR) to skip bad character check.

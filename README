@@ -13,6 +13,8 @@ SYNOPSIS
             $DICTIONARY = 0;
 
             $GROUPS = 0;
+   
+            $SKIPCHARSET = 0;
 
             print IsBadPassword("clearant");
 
@@ -70,6 +72,10 @@ VARIABLES
         Location where we are looking for dictionary files. You may want to
         set this variable if you are using not *NIX like operating system.
 
+    6   $SKIPCHARSET
+
+        Set $SKIPCHAR to 1 to skip checking for bad characters.
+
 FILES
     *   /usr/dict/web2
 
@@ -84,10 +90,12 @@ SEE ALSO
     String::Validator::Password
 
 AUTHOR
-    Raz Information Systems, razinf@cpan.org
+    Ariel Brosh (RIP), January 2002.
+
+    Oded S. Resnik, from April 2004 razinf@cpan.org.
 
 COPYRIGHT
-    Copyright (c) 2001 - 2013 Raz Information Systems Ltd.
+    Copyright (c) 2001 - 2014 Raz Information Systems Ltd.
     <http://www.raz.co.il/>
 
     This package is distributed under the same terms as Perl itself, see the

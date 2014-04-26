@@ -7,7 +7,7 @@
 # (It may become useful if the test is moved to ./t subdirectory.)
 use Test::More qw(no_plan);
 
-use Data::Password qw(IsBadPassword $MAXLEN @DICTIONARIES);
+use Data::Password qw(IsBadPassword $MAXLEN @DICTIONARIES $SKIPCHAR);
 
 ok(1,'Module Loaded');
 
@@ -16,6 +16,12 @@ my %tests = qw(BlaBla 1 blabla 0 cleaner 0 qwerTy 0
    Abramson 0 
    noboXX 1 MAxLEN1288457 0 MAXlen12r45f7 1
 );
+
+# Bad space test
+   $tests{"I Glxi"} = 1;
+# Bad char test
+   $tests{"\0BC2f4a"} = 0;
+
 my $have_dic =0;
 my $dic_name = '';
 
@@ -40,3 +46,10 @@ while (my ($pass, $good) = each %tests) {
 	ok($got eq $good,"$pass: $reason");
 }
 
+{
+      $SKIPCHAR = 1;
+      my $pass = "\0BC2f4a";
+      my $reason = IsBadPassword($pass) || '';
+      ok(! $reason ,"$pass: $reason");
+      $SKIPCHAR = 0;
+}

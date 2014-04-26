@@ -7,16 +7,16 @@ package Data::Password;
 
 use strict;
 require Exporter;
-use vars qw($DICTIONARY $FOLLOWING $GROUPS $MINLEN $MAXLEN
+use vars qw($DICTIONARY $FOLLOWING $GROUPS $MINLEN $MAXLEN $SKIPCHAR
 		$FOLLOWING_KEYBOARD @DICTIONARIES
 		$VERSION @ISA @EXPORT_OK %EXPORT_TAGS);
 
-@EXPORT_OK = qw($DICTIONARY $FOLLOWING $GROUPS $FOLLOWING_KEYBOARD
+@EXPORT_OK = qw($DICTIONARY $FOLLOWING $GROUPS $FOLLOWING_KEYBOARD $SKIPCHAR
 	@DICTIONARIES $MINLEN $MAXLEN IsBadPassword IsBadPasswordForUNIX);
 %EXPORT_TAGS = ('all' => [@EXPORT_OK]);
 @ISA = qw(Exporter);
 
-$VERSION = '1.08';
+$VERSION = '1.09';
 
 $DICTIONARY = 5;
 $FOLLOWING = 3;
@@ -25,6 +25,8 @@ $GROUPS = 2;
 
 $MINLEN = 6;
 $MAXLEN = 8;
+$SKIPCHAR = 0;
+
 @DICTIONARIES = qw(/usr/dict/web2 /usr/dict/words /usr/share/dict/words /usr/share/dict/linux.words);
 
 sub OpenDictionary {
@@ -92,7 +94,8 @@ sub CheckTypes {
 
 sub CheckCharset {
 	my $pass = shift;
-	$pass =~ /[\0-\x1F \x7F]/; 
+        return 0 if $SKIPCHAR;
+	$pass =~ /[\0-\x1F\x7F]/; 
 }
 
 sub CheckLength {
@@ -159,6 +162,8 @@ Data::Password - Perl extension for assessing password quality.
 	$DICTIONARY = 0;
 
 	$GROUPS = 0;
+   
+        $SKIPCHARSET = 0;
 
 	print IsBadPassword("clearant");
 
@@ -240,6 +245,12 @@ Minimum and maximum length of a password. Both can be set to false.
 Location where we are looking for dictionary files. You may want to 
 set this variable if you are using not *NIX like operating system.
 
+=item 6
+
+$SKIPCHARSET
+
+Set $SKIPCHAR to 1 to skip checking for bad characters.
+
 =back
 
 =head1 FILES
@@ -270,11 +281,13 @@ and L<String::Validator::Password>
 
 =head1 AUTHOR
 
-Raz Information Systems, B<razinf@cpan.org> 
+Ariel Brosh (RIP), January 2002.
+
+Oded S. Resnik, from April 2004 B<razinf@cpan.org>.
 
 =head1 COPYRIGHT
 
-Copyright (c) 2001 - 2013  Raz Information Systems Ltd.
+Copyright (c) 2001 - 2014  Raz Information Systems Ltd.
 L<http://www.raz.co.il/>
 
 This package is distributed under the same terms as Perl itself, see the

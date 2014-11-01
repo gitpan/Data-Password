@@ -16,5 +16,10 @@ MAKE
 WriteMakefile(
     'NAME'	=> 'Data::Password',
     'VERSION_FROM' => 'Password.pm', # finds $VERSION
+    PREREQ_PM    => {
+       'Test::More' => 0,
+       'Exporter'   => 0,
+    },
+    
     'dist' => {'COMPRESS' => 'gzip --best --force'},
 );
